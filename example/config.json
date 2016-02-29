@@ -1,0 +1,13 @@
+{
+  "api": {
+    "acceptHeader": "application/json",
+    "host": "jsonplaceholder.typicode.com",
+    "contentType": "json"
+  },
+  "filesDirectory": "example/views",
+  "routes": [
+    "/posts",
+    "/posts/1",
+    "/users"
+  ]
+}
