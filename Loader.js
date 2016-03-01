@@ -11,12 +11,12 @@ var fs       = require('fs'),
     path     = require('path');
 
 /**
- * uses config object (enriched with current working directory) and option object,
- * which contains the options from cli command
+ * create new Loader object
  *
- * @param Config
- * @param option
+ * @param {Object} Config - config object
+ * @param {Object} option - object containing options from cli command
  * @returns {string}
+ * @constructor
  */
 function Loader(Config, option) {
     this.Config = Config;
@@ -24,7 +24,8 @@ function Loader(Config, option) {
 }
 
 /**
- * fetch routes from options or config an loop over the array to download content from every single route
+ * fetch routes from options or config and loop over the array to download
+ * content from every single route
  */
 Loader.prototype.download = function () {
     var routes  = (this.option.hasOwnProperty('paths') && typeof this.option.paths === 'string')
@@ -37,8 +38,9 @@ Loader.prototype.download = function () {
 };
 
 /**
+ * setup request and pipe response to a file
  *
- * @param route
+ * @param {string} route - route from where to fetch content
  */
 Loader.prototype.load = function (route) {
     var api      = this.Config.get('api'),
@@ -47,7 +49,7 @@ Loader.prototype.load = function (route) {
         options,
         request;
 
-    fileName = this._buildFileName(route);
+    fileName = this.buildFileName(route);
     file     = fs.createWriteStream(fileName);
     options  = {
         method: 'GET',
@@ -71,9 +73,10 @@ Loader.prototype.load = function (route) {
 };
 
 /**
+ * define the file extension on base of config entry
  *
- * @param fileName
- * @returns {*}
+ * @param {string} fileName - filename of the file to write, without extension
+ * @returns {string}
  */
 Loader.prototype.defineFileExtension = function (fileName) {
     var api = this.Config.get('api');
@@ -89,12 +92,13 @@ Loader.prototype.defineFileExtension = function (fileName) {
 };
 
 /**
+ * build a filename (including directory) to save request response to
  *
- * @param route
+ * @param {string} route - the route to fetch
  * @returns {string}
  * @private
  */
-Loader.prototype._buildFileName = function (route) {
+Loader.prototype.buildFileName = function (route) {
     var fileName = route.substr(1).replace(/\//g, '-');
     fileName = this.defineFileExtension(fileName);
 

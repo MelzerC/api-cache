@@ -14,6 +14,11 @@ var Config = require('./Config'),
     Loader = require('./Loader');
 
 program.version('0.0.1');
+
+/**
+ * refresh command
+ * refresh all routes, or just the given ones in --paths option
+ */
 program
     .command('refresh <config-file>')
     .description('refresh local files')
@@ -29,6 +34,10 @@ program
         loader.download();
     });
 
+/**
+ * start a server which delivers all saved files through the same routes as
+ * the given ones in config
+ */
 program
     .command('start <config-file>')
     .description('start small server to deliver loaded files')
@@ -37,9 +46,15 @@ program
         console.log(option.port)
     });
 
+/**
+ * parse cli command arguments
+ */
 program
     .parse(process.argv);
 
+/**
+ * print help in case there are no arguments
+ */
 if (!program.args.length) {
     program.help();
 }

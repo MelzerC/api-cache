@@ -1,13 +1,17 @@
 {
   "api": {
-    "acceptHeader": "application/json",
-    "host": "jsonplaceholder.typicode.com",
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "api-cache"
+    },
+    "protocol": "https",
+    "host": "api.github.com",
     "contentType": "json"
   },
   "filesDirectory": "example/views",
   "routes": [
-    "/posts",
-    "/posts/1",
-    "/users"
+    "/users/MelzerC",
+    "/users/MelzerC/repos",
+    "/repos/MelzerC/api-cache"
   ]
 }
