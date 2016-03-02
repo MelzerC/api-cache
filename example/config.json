@@ -1,0 +1,23 @@
+{
+  "api": {
+    "headers": {
+      "Accept": "application/json",
+      "User-Agent": "api-cache"
+    },
+    "protocol": "https",
+    "host": "api.github.com",
+    "contentType": "json"
+  },
+  "server": {
+    "port": 3000,
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "filesDirectory": "example/views",
+  "routes": [
+    "/users/MelzerC",
+    "/users/MelzerC/repos",
+    "/repos/MelzerC/api-cache"
+  ]
+}
