@@ -1,6 +1,6 @@
 {
   "name": "api-cache",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "npm module to cache an api",
   "repository": "git@github.com:MelzerC/api-cache.git",
   "main": "index.js",
