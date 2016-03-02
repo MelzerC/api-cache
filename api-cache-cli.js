@@ -10,8 +10,9 @@
 var program = require('commander'),
     fs      = require('fs');
 
-var Config = require('./Config'),
-    Loader = require('./Loader');
+var Config = require('./lib/Config'),
+    Loader = require('./lib/Loader'),
+    Server = require('./lib/Server');
 
 program.version('0.0.1');
 
@@ -30,6 +31,7 @@ program
 
         Config.setConfig(JSON.parse(fs.readFileSync(configFile, 'utf-8')));
         Config.set('workingDirectory', process.env.PWD);
+
         var loader = new Loader(Config, option);
         loader.download();
     });
@@ -42,8 +44,16 @@ program
     .command('start <config-file>')
     .description('start small server to deliver loaded files')
     .option('-p, --port <port>', 'port to use')
-    .action(function (command, option) {
-        console.log(option.port)
+    .action(function (configFile, option) {
+        if (!fs.existsSync(configFile)) {
+            throw new Error('config file does not exist');
+        }
+
+        Config.setConfig(JSON.parse(fs.readFileSync(configFile, 'utf-8')));
+        Config.set('workingDirectory', process.env.PWD);
+
+        var server = new Server(Config, option);
+        server.start();
     });
 
 /**
