@@ -1,3 +1,6 @@
+# ignore idea
+.idea/
+
 # ignore npm cache directory and node_modules
 .npm/
 node_modules/
